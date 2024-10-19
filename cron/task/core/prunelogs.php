@@ -65,10 +65,10 @@ class prunelogs extends \phpbb\cron\task\base
 				return $user->lang['ACP_' . str_replace('LOG_', '', $k) . '_LOGS'] . ': ' . $v;
 			},
 			$log_aray, array_keys($log_aray));
-			$this->log->add('admin', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_PRUNE_LOGS', false, array(implode(',<br />', $loglist)));
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip ?? null, 'LOG_PRUNE_LOGS', false, array(implode(',<br />', $loglist)));
 		} else
 		{
-			$this->log->add('admin', $this->user->data['user_id'], $this->user->data['session_ip'], 'NO_PRUNE_LOGS', false, array());
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip ?? null, 'NO_PRUNE_LOGS', false, array());
 		}
 		$this->config->set('prune_logs_last_gc', time());
 	}
